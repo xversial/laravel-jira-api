@@ -1,8 +1,16 @@
 {
-    "name": "endeavors/jira",
+    "name": "vionox/jira",
     "description": "Easy to use client to access jira",
     "keywords": ["jira-api-restclient","jira-api","jira","laravel-jira", "laravel"],
     "authors": [
+        {
+            "name": "VIONOX Inc.",
+            "email": "help@vionox.com"
+        },
+        {
+            "name": "Brandon Xversial",
+            "email": "xversial@vionox.com"
+        },
         {
             "name": "adam",
             "email": "adam@healthendeavors.com"
@@ -15,7 +23,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Endeavors\\Jira\\": "src/"
+            "Vionox\\Jira\\": "src/"
         }
     },
     "minimum-stability": "dev"
