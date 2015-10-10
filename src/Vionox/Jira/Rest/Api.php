@@ -77,11 +77,12 @@ class Api extends ChobieJiraApi
      * issue key should be YOURPROJ-221
      *
      * @param $name
-     * @return \chobie\Jira\Api\Result|false|string
+     * @param string $expand
+     * @return ChobieJiraApi\Result|false|string
      * @internal param $issueKey
      * @internal param $expand
      */
-    public function getIssue( $name )
+    public function getIssue( $name, $expand = '' )
     {
         $issues = $this->search( "project = $name" )->getIssues();
 
