@@ -79,8 +79,6 @@ class Api extends ChobieJiraApi
      * @param $name
      * @param string $expand
      * @return ChobieJiraApi\Result|false|string
-     * @internal param $issueKey
-     * @internal param $expand
      */
     public function getIssue( $name, $expand = '' )
     {
@@ -94,7 +92,6 @@ class Api extends ChobieJiraApi
     /**
      * @param null $value
      * @return int
-     * @internal param null $key
      */
     public function count( $value = null )
     {

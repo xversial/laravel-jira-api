@@ -31,7 +31,6 @@ class Project extends JiraModel
 	 *
 	 * @param $project
 	 * @return Project[]
-	 * @internal param mixed $items
 	 */
 	public static function make($project)
 	{
@@ -59,7 +58,6 @@ class Project extends JiraModel
 
 	/**
 	 * @return \chobie\Jira\Issue[]
-	 * @internal param $name
 	 */
 	public function issues()
 	{

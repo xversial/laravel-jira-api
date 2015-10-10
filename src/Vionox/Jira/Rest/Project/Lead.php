@@ -27,7 +27,6 @@ class Lead extends JiraModel
 	 *
 	 * @param $lead
 	 * @return \Illuminate\Support\Collection
-	 * @internal param mixed $items
 	 */
 	public static function make($lead)
 	{
