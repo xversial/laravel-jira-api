@@ -17,6 +17,16 @@ interface ApiInterface
      */
     public function getIssue( $issueKey, $expand = '' );
 
+    /**
+     * query issues
+     *
+     * @param $jql
+     * @param $startAt
+     * @param $maxResult
+     * @param string $fields
+     *
+     * @return \chobie\Jira\Api\Result
+     */
     public function search( $jql, $startAt = 0, $maxResult = 20, $fields = '*navigable' );
 
     public function api(
