@@ -61,6 +61,6 @@ class Project extends JiraModel
 	 */
 	public function issues()
 	{
-		return \Jira::listProjectIssues($this->key);
+		return \Vionox\Jira\Rest\Api::listProjectIssues($this->key);
 	}
 }

@@ -82,11 +82,7 @@ class Api extends ChobieJiraApi
      */
     public function getIssue( $name, $expand = '' )
     {
-        $issues = $this->search( "project = $name" )->getIssues();
-
-        $this->projectName = $name;
-
-        return $issues;
+        return parent::getIssue( $name, $expand );
     }
 
     /**
@@ -106,6 +102,17 @@ class Api extends ChobieJiraApi
         }
 
         return $count;
+    }
+
+    /**
+     * @param $name
+     * @return \chobie\Jira\Issue[]
+     */
+    public function listProjectIssues( $name )
+    {
+        $issues = $this->search( "project = $name" )->getIssues();
+
+        return $issues;
     }
 
     /**
