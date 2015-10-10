@@ -29,8 +29,9 @@ class Project extends JiraModel
 	/**
 	 * Create a new collection instance if the value isn't one already.
 	 *
-	 * @param  mixed  $items
-	 * @return \Illuminate\Support\Collection
+	 * @param $project
+	 * @return Project[]
+	 * @internal param mixed $items
 	 */
 	public static function make($project)
 	{
@@ -57,10 +58,8 @@ class Project extends JiraModel
 	}
 
 	/**
-	 * A project has many issues.
-	 *
-	 * @param  mixed  $items
-	 * @return \Illuminate\Support\Collection
+	 * @return \chobie\Jira\Issue[]
+	 * @internal param $name
 	 */
 	public function issues()
 	{

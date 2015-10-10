@@ -3,72 +3,118 @@
 use chobie\Jira\Api as ChobieJiraApi;
 use Illuminate\Support\Collection;
 
+/**
+ * Class Api
+ * @package Vionox\Jira\Rest
+ */
 class Api extends ChobieJiraApi
 {
-	protected $query = null;
+    protected $query = null;
 
-	protected $projectName=null;
+    protected $projectName = null;
 
-	public function projects()
-	{
-		$resultCollection = new Collection($this->getProjects()->getResult());
+    /**
+     * @return Collection|null
+     */
+    public function projects()
+    {
+        $resultCollection = new Collection( $this->getProjects()->getResult() );
 
-		$this->query = $resultCollection;
+        $this->query = $resultCollection;
 
-		return $this->query;
-	}
+        return $this->query;
+    }
 
-	public function listProjectIssues($name)
-	{
-		$issues = $this->search("project = $name")->getIssues();
+    /**
+     * @param $projectName
+     */
+    public function setProjectName( $projectName )
+    {
+        $this->projectName = $projectName;
+    }
 
-		$this->projectName = $name;
+    /**
+     * @param $name
+     * @return \chobie\Jira\Issue[]
+     */
+    public function listAssigneeIssues( $name )
+    {
+        $issues = $this->search( "assignee = $name" )->getIssues();
 
-		return $issues;
-	}
+        return $issues;
+    }
 
-	public function listAssigneeIssues($name)
-	{
-		$issues = $this->search("assignee = $name")->getIssues();
+    /**
+     * get the defined project
+     *
+     * @param string $projectKey
+     * @return \Vionox\Jira\Rest\Project
+     * @static
+     */
+    public function project( $projectKey )
+    {
+        $project = Project::make( $this->getProject( $projectKey ) );
 
-		return $issues;
-	}
+        return $project;
+        // do something with the project object
+    }
 
-	public function project($key)
-	{
-		$project = Project::make($this->getProject($key));
+    /**
+     * @param $key
+     * @param string $expand
+     * @return \chobie\Jira\Issue
+     */
+    public function issue( $key, $expand = 'expand' )
+    {
+        $issue = $this->getIssue( $key, $expand );
 
-		return $project;
-		// do something with the project object
-	}
+        return $issue;
+    }
 
-	public function issue($key)
-	{
-		$issue = $this->getIssue($key, 'expand');
+    /**
+     * get specified issue.
+     *
+     * issue key should be YOURPROJ-221
+     *
+     * @param $name
+     * @return \chobie\Jira\Api\Result|false|string
+     * @internal param $issueKey
+     * @internal param $expand
+     */
+    public function getIssue( $name )
+    {
+        $issues = $this->search( "project = $name" )->getIssues();
 
-		return $issue;
-	}
+        $this->projectName = $name;
 
-	public function count($value=null)
-	{
-		// return the count of listProjectIssues
+        return $issues;
+    }
 
-		$count = 0;
+    /**
+     * @param null $value
+     * @return int
+     * @internal param null $key
+     */
+    public function count( $value = null )
+    {
+        // return the count of listProjectIssues
 
-		if( null !== $name )
-		{
-			$count = count($this->listProjectIssues($value));
-		}
-		elseif( null !== $this->projectName )
-		{
-			$count = count($this->listProjectIssues($this->projectName));
-		}
+        $count = 0;
 
-		return $count;
-	}
+        if ( null !== $value ) {
+            $count = count( $this->listProjectIssues( $value ) );
+        } elseif ( null !== $this->projectName ) {
+            $count = count( $this->listProjectIssues( $this->projectName ) );
+        }
 
-	public function get()
-	{
-		return $this->query;
-	}
+        return $count;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function get()
+    {
+        return $this->query;
+    }
 }

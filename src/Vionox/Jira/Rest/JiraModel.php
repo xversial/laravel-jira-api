@@ -132,6 +132,7 @@ class JiraModel
 		{
 			return $this->getRelationshipFromMethod($key, $camelKey);
 		}
+		return null;
 	}
 
 	/**
@@ -170,6 +171,7 @@ class JiraModel
 		{
 			return $this->attributes[$key];
 		}
+        return null;
 	}
 
 	/**

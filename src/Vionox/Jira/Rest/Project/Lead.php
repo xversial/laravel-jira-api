@@ -25,8 +25,9 @@ class Lead extends JiraModel
 	/**
 	 * Create a new collection instance if the value isn't one already.
 	 *
-	 * @param  mixed  $items
+	 * @param $lead
 	 * @return \Illuminate\Support\Collection
+	 * @internal param mixed $items
 	 */
 	public static function make($lead)
 	{
